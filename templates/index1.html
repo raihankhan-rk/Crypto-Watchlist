@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 class="heading">Your Daily Watchlist 📈</h1>
+    <div class="header">
+        <table class="prices">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Coin</th>
+                    <th>Price</th>
+                    <th>Price change in 24h</th>
+                    <th>Market Cap</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="content">
+        <table>
+            <tbody>
+                {% for coin in coins %}
+                <tr>
+                    <td><img src="{{coin['image']}}" alt="" height=30 width=30></img></td>
+                    <td>{{coin['name']}}</td>
+                    <td>Rs. {{coin['current_price']}}</td>
+                    {% if coin['price_change_percentage_24h'] < 0 %}
+                    <td><font color="red">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</td>
+                    {% else %}
+                    <td><font color="green">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</td>
+                    {% endif %}
+                    <td>Rs. {{coin['market_cap']}}</td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</body>
+<style>
+    body{
+    margin:0px;
+    text-align: center ;
+}
+
+
+@media screen and (min-width: 951px){
+
+table{
+    table-layout: fixed;
+}
+.heading{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vw;
+}
+
+.prices{
+    display: inline-flex;
+    align-self: center;
+    width:80%;
+    background-color: rgb(111, 185, 255);
+    border: 1px solid black;
+}
+
+
+
+.content{
+    margin: auto;
+    height: 500px;
+    overflow-x: auto;
+    margin-top: 0px;
+    border: 1px solid black;
+    width: 80%;
+    font-size: 1.1vw;
+
+}
+
+th{
+    margin: 0px;
+    padding:20px 5.2vw 20px 5.2vw;
+    text-align: center;
+    font-family: 'Montserrat';
+
+}
+
+td{
+    margin: auto;
+
+}
+
+}
+
+
+
+
+
+@media screen and (max-width: 950px){
+    .heading{
+        font-family: 'Montserrat', sans-serif;
+        font-size: 40px;
+    }
+
+    /* thead{
+        background-color: rgb(111, 185, 255);
+    } */
+
+    .prices{
+        display: inline-flex;
+        text-align: center;
+        width:80%;
+        background-color: rgb(111, 185, 255);
+        border: 1px solid black;
+    }
+
+    th{
+        padding:20px 3.5vw 20px 3.5vw;
+        text-align: center;
+        font-size: 1.765vw;
+        font-family: 'Montserrat';
+
+    }
+
+    .content{
+        margin: auto;
+        height: 500px;
+        overflow-x: auto;
+        margin-top: 0px;
+        border: 1px solid black;
+        width: 80%;
+        font-size: 1.2vw;
+
+    }
+}
+</style>
+</html>

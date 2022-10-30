@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Test</title>
 </head>
 <body>
-$END$
+
+<div class="table100 ver3 m-b-110">
+<div class="table100-head">
+<table>
+<thead>
+<tr class="row100 head">
+<th class="cell100 column1">Symbol</th>
+    <th class="cell100 column1">Coin</th>
+<th class="cell100 column2">Price</th>
+<th class="cell100 column3">Price change in 24h</th>
+<th class="cell100 column4">Market Cap</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class="table100-body js-pscroll ps ps--active-y">
+<table>
+<tbody>
+{% for coin in coins %}
+<tr class="row100 body">
+<td><img src="{{coin['image']}}" alt="" height=30 width=30></img></th>
+<td class="cell100 column2">{{coin['name']}}</td>
+<td class="cell100 column3">Rs. {{coin['current_price']}}</td>
+    {% if coin['price_change_percentage_24h'] < 0 %}
+    <td class="cell100 column4"><font color="red">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</td>
+    {% else %}
+    <td class="cell100 column4"><font color="green">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</td>
+    {% endif %}
+    <td class="cell100 column4">Rs. {{coin['market_cap']}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 585px; right: 5px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 293px;"></div></div></div>
+</div>
+
 </body>
+
+<style>
+
+</style>
 </html>

@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Crypto Watchlist 📈</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<!-- <script type="text/javascript" src="main.js"></script> -->
+<div class="container">
+	
+	<div class="table">
+		<div class="table-header">
+			<div class="header__item"><a id="name" class="filter__link" href="#">Symbol</a></div>
+			<div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Currency</a></div>
+			<div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Price</a></div>
+			<div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Up/Down</a></div>
+			<div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Market Cap</a></div>
+		</div>
+		<hr>
+		<div class="table-content">
+			{% for coin in coins %}
+			<div class="table-row">		
+				<div class="table-data"><img src="{{coin['image']}}" alt="" height=30 width=30></img></div>
+				<div class="table-data">{{coin['name']}}</div>
+				<div class="table-data">Rs. {{coin['current_price']}}</div>
+				{% if coin['price_change_percentage_24h'] < 0 %}
+				<div class="table-data"><font color="red">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</div>
+				{% else %}
+				<div class="table-data"><font color="green">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</div>
+				{% endif %}
+				<div class="table-data">Rs. {{coin['market_cap']}}</div>
+			</div>
+			{% endfor %}
+		</div>	
+	</div>
+</div>
+</body>
+<style>
+	@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
+
+$color-alpha: #1772FF;
+$color-form-highlight: #EEEEEE;
+
+*, *:before, *:after {
+	box-sizing:border-box;
+}
+
+body {
+	padding:$base-spacing-unit;
+	font-family:'Source Sans Pro', sans-serif;
+	margin:0;
+	background-color: black;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin:0;
+}
+
+.container {
+	max-width: 1000px;
+	margin-right:auto;
+	margin-left:auto;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	min-height:100vh;
+}
+
+.table {
+	width:100%;
+	border:1px solid $color-form-highlight;
+}
+
+.table-header {
+	display:flex;
+	width:100%;
+	background:#000;
+	padding:($half-spacing-unit * 1.5) 0;
+}
+
+.table-row {
+	display:flex;
+	width:100%;
+	padding:($half-spacing-unit * 1.5) 0;
+	background-color: black;
+	margin-bottom: 10px;
+    background:#000;
+
+
+
+
+	&:nth-of-type(odd) {
+		background:$color-form-highlight;
+
+	}
+}
+
+.table-data, .header__item {
+	flex: 1 1 20%;
+	text-align:center;
+	color: white;
+}
+
+.header__item {
+	text-transform:uppercase;
+}
+
+.filter__link {
+	color:white;
+	text-decoration: none;
+	position:relative;
+	display:inline-block;
+	padding-left:$base-spacing-unit;
+	padding-right:$base-spacing-unit;
+
+	&::after {
+		content:'';
+		position:absolute;
+		right:-($half-spacing-unit * 1.5);
+		color:white;
+		font-size:$half-spacing-unit;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	&.desc::after {
+		content: '(desc)';
+	}
+
+	&.asc::after {
+		content: '(asc)';
+	}
+
+}
+</style>
+</html>

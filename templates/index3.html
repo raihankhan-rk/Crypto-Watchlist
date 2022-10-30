@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Bree Serif", serif;
+            color: #fff;
+            background-color: #000;
+
+        }
+
+        .coin-main {
+            margin-top: 64px;
+            color: white;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #fff;
+        }
+
+        div {
+            display: block;
+        }
+
+        .coin-input {
+            padding-left: 16px;
+            width: 300px;
+            height: 50px;
+            border-radius: 4px;
+            border: none;
+            background-image: linear-gradient(90deg, #3ab5b0 0, #3d99be 31%, #56317a);
+            color: white;
+        }
+
+        .coin-search,
+        .coin-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+
+        .coin-search {
+            margin-bottom: 64px;
+            justify-content: center;
+        }
+
+        .coin-cointainer {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .coin,
+        .coin-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .coin-row {
+            flex-direction: row;
+            justify-items: start;
+            height: 80px;
+            border-bottom: 1px solid #d7d7d7;
+            width: 900px;
+        }
+
+        .coin {
+            padding: 24px;
+            min-width: 300px;
+        }
+
+        .coin h1 {
+            font-size: 16px;
+            width: 150px;
+        }
+
+        .coin img {
+            height: 30px;
+            width: 30px;
+            margin-right: 10px;
+        }
+
+        .coin-data {
+            display: flex;
+            text-align: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .coin-price {
+            width: 150px;
+        }
+
+        .red {
+            color: #f00606;
+        }
+
+        .green {
+            color: #11d811;
+            ;
+        }
+
+        .coin-percent {
+            width: 100%;
+        }
+
+        .coin-marketcap {
+            width: 155px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="coin-main">
+            <div class="coin-search">
+                <form action="">
+                    <input type="text" class="coin-input" placeholder="Provide the coin name">
+                </form>
+            </div>
+            <div class="coin-cointainer">
+                {% for coin in coins %}
+                <div class="coin-row">
+                    <div class="coin">
+                        <img src="{{coin['image']}}" alt="" height=30 width=30></img>
+                        <h1>{{coin['name']}}</h1>
+                        <p class="coin-symbol"></p>
+                    </div>
+                    <div class="coin-data">
+                        <p class="coin-price">Rs. {{coin['current_price']}}</p>
+                        {% if coin['price_change_percentage_24h'] < 0 %}
+                        <p class="coin-percent red"><font color="red">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</p>
+                        {% else %}
+                        <p class="coin-percent red"><font color="green">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</p>
+                        {% endif %}
+                        <p class="coin-marketcap">Rs. {{coin['market_cap']}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
