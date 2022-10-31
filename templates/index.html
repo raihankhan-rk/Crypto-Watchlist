@@ -28,13 +28,13 @@
                 <tr>
                     <td><img src="{{coin['image']}}" alt="" height=30 width=30></img></td>
                     <td>{{coin['name']}}</td>
-                    <td>Rs. {{coin['current_price']}}</td>
+                    <td>{{"Rs. {:,}".format(coin['current_price']) }}</td>
                     {% if coin['price_change_percentage_24h'] < 0 %}
                     <td><font color="red">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</td>
                     {% else %}
                     <td><font color="green">{{ "%.2f"|format(coin['price_change_percentage_24h']) }}%</td>
                     {% endif %}
-                    <td>Rs. {{(coin['market_cap']) }}</td>
+                    <td>{{"Rs. {:,}".format(coin['market_cap']) }}</td>
                   </tr>
             {% endfor %}
 
